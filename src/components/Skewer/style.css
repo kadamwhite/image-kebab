@@ -1,0 +1,29 @@
+.skewer {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dragzone {
+  z-index: 2;
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+.skewer img {
+  z-index: 1;
+  display: block;
+  height: auto; 
+  width: auto; 
+  max-width: 90vw; 
+  max-height: 90vh;
+  transform-origin: 0 0;
+}

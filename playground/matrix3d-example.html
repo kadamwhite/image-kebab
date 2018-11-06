@@ -36,7 +36,8 @@
 
   getTransform = function(from, to) {
     var A, H, b, h, i, k, k_i, l, lhs, m, ref, rhs;
-    console.assert((from.length === (ref = to.length) && ref === 4));
+    console.log( from, to );
+    // console.assert((from.length === (ref = to.length) && ref === 4));
     A = []; // 8x8
     for (i = k = 0; k < 4; i = ++k) {
       A.push([from[i].x, from[i].y, 1, 0, 0, 0, -from[i].x * to[i].x, -from[i].y * to[i].x]);
@@ -50,13 +51,14 @@
     // Solve A * h = b for h
     h = numeric.solve(A, b);
     H = [[h[0], h[1], 0, h[2]], [h[3], h[4], 0, h[5]], [0, 0, 1, 0], [h[6], h[7], 0, 1]];
-// Sanity check that H actually maps `from` to `to`
+    // Sanity check that H actually maps `from` to `to`
     for (i = m = 0; m < 4; i = ++m) {
       lhs = numeric.dot(H, [from[i].x, from[i].y, 0, 1]);
       k_i = lhs[3];
       rhs = numeric.dot(k_i, [to[i].x, to[i].y, 0, 1]);
       console.assert(numeric.norm2(numeric.sub(lhs, rhs)) < 1e-9, "Not equal:", lhs, rhs);
     }
+    console.log( H );
     return H;
   };
 
@@ -90,25 +92,26 @@
     })();
     // Solve for the transform
     H = getTransform(from, to);
-    
     // Apply the matrix3d as H transposed because matrix3d is column major order
     // Also need use toFixed because css doesn't allow scientific notation
+    const matrix3d = `matrix3d(${((function() {
+      var k, results;
+      results = [];
+      for (i = k = 0; k < 4; i = ++k) {
+        results.push((function() {
+          var l, results1;
+          results1 = [];
+          for (j = l = 0; l < 4; j = ++l) {
+            results1.push(H[j][i]/*.toFixed(20)*/);
+          }
+          return results1;
+        })());
+      }
+      return results;
+    })()).join(',')})`;
+    // console.log( matrix3d );
     $(element).css({
-      'transform': `matrix3d(${((function() {
-        var k, results;
-        results = [];
-        for (i = k = 0; k < 4; i = ++k) {
-          results.push((function() {
-            var l, results1;
-            results1 = [];
-            for (j = l = 0; l < 4; j = ++l) {
-              results1.push(H[j][i].toFixed(20));
-            }
-            return results1;
-          })());
-        }
-        return results;
-      })()).join(',')})`,
+      'transform': matrix3d,
       'transform-origin': '0 0'
     });
     return typeof callback === "function" ? callback(element, H) : void 0;
@@ -158,6 +161,7 @@
         },
         drag: () => {
           return applyTransform(element, originalPos, (function() {
+            // console.log( k, controlPoints );
             var k, len, results;
             results = [];
             for (k = 0, len = controlPoints.length; k < len; k++) {
@@ -186,7 +190,7 @@
 
   makeTransformable('.box', function(element, H) {
     var i, j;
-    console.log($(element).css('transform'));
+    // console.log($(element).css('transform'));
     return $(element).html($('<table>').append($('<tr>').html($('<td>').text('matrix3d('))).append((function() {
       var k, results;
       results = [];

@@ -12,3 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+small {
+  font-size: 0.8rem;
+}
+small.attribution {
+  font-style: italic;
+}
+
+.attribution a {
+  color: lightgrey;
+}

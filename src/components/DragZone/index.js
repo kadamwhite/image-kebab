@@ -99,6 +99,9 @@ class DragZone extends PureComponent {
       } );
     } else {
       this.onDrag( evt.clientX, evt.clientY );
+      // What is new becomes old
+      this.x = evt.clientX;
+      this.y = evt.clientY;
     }
   }
 
