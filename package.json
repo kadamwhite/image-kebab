@@ -2,6 +2,7 @@
   "name": "image-kebab",
   "version": "0.1.0",
   "private": true,
+  "license": "Artistic-2.0",
   "dependencies": {
     "classnames": "^2.2.6",
     "lodash.throttle": "^4.1.1",
