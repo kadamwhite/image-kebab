@@ -1,0 +1,13 @@
+.dragzone {
+  cursor: grab;
+  position: relative;
+}
+.dragzone.dragging {
+  cursor: grabbing;
+}
+
+.dragzone__preview {
+  pointer-events: none;
+  border: 1px dotted grey;
+  position: absolute;
+}
