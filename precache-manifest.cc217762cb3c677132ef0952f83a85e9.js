@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/image-kebab/static/css/main.747a7995.chunk.css"
   },
   {
-    "revision": "381a30980ec6d1afe0f10863dac06b92",
+    "revision": "abbd066f0516f8bd29fad1e4d73a9b97",
     "url": "/image-kebab/index.html"
   }
 ];
