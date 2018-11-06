@@ -16,7 +16,7 @@ const pairToPoint = ( [ x, y ] ) => ( { x, y } );
  */
 const calculateMatrix = ( fromPoint, toPoint ) => {
   // Adapted from https://franklinta.com/2014/09/08/computing-css-matrix3d-transforms/
-  console.assert( fromPoint.length === 4 & toPoint.length === 4 );
+  // console.assert( fromPoint.length === 4 & toPoint.length === 4 );
 
   // Creates 8x8 array.
   const A = fromPoint.reduce( ( memo, { x, y }, idx ) => {
@@ -54,7 +54,6 @@ const calculateMatrix = ( fromPoint, toPoint ) => {
   //   console.assert( numeric.norm2( numeric.sub( lhs, rhs ) ) < 1e-9, "Not equal:", lhs, rhs );
   // }
 
-  console.log( H );
   return H;
 };
 
@@ -88,34 +87,16 @@ const getTransform = ( transforms, width, height ) => {
     };
   } );
 
-  // console.log( calculateMatrixOriginal( fromPoint, toPoint ) );
-
   // Calculate transformation matrix and reduce to matrix3d transform syntax.
   const H = calculateMatrix( fromPoint, toPoint );
-  /* eslint-disable */
-  return `matrix3d(${((function() {
-    var i, j, k, results;
-    results = [];
-    for (i = k = 0; k < 4; i = ++k) {
-      results.push((function() {
-        var l, results1;
-        results1 = [];
-        for (j = l = 0; l < 4; j = ++l) {
-          results1.push(H[j][i].toFixed(20));
-        }
-        return results1;
-      })());
+
+  let matrix3d = [];
+  for ( let col = 0; col < 4; col++ ) {
+    for ( let row = 0; row < 4; row++ ) {
+      matrix3d.push( H[row][col] );
     }
-    return results;
-  })()).join(',')})`
-  /* eslint-enable */
-  // return `matrix3d(${ calculateMatrixOriginal( fromPoint, toPoint ).reduce(
-  //   ( matrix, row ) => [
-  //     ...matrix,
-  //     ...row, //.map( ( cell ) => cell.toFixed( 20 ) ),
-  //   ],
-  //   []
-  // ) })`;
+  }
+  return `matrix3d(${ matrix3d.join( ',' ) })`;
 }
 
 class Skewer extends PureComponent {
@@ -170,8 +151,6 @@ class Skewer extends PureComponent {
     if ( ! ( width && height ) ) {
       return 'initial';
     }
-
-    console.log( width, height );
 
     // Call out to the pure function defined above.
     return getTransform( transforms, width, height );
