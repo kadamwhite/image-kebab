@@ -36,12 +36,3 @@ input[type="button"],
 input[type="file"] {
 	cursor: pointer;
 }
-
-.dropzone {
-	position: relative;
-}
-
-.image-upload-button {
-	width: 200px;
-	margin-top: 1em;
-}

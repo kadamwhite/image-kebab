@@ -7,3 +7,8 @@
 	border: 2px dashed #666;
 	border-radius: 5%;
 }
+
+.image-upload-button {
+	width: 200px;
+	margin-top: 1em;
+}
