@@ -43,3 +43,12 @@ export const setImagePosition = ( clientRect ) => {
     payload,
   };
 };
+
+export const RESIZE_SCREEN = 'RESIZE_SCREEN';
+export const resizeScreen = ( width, height ) => ( {
+	type: RESIZE_SCREEN,
+	payload: {
+		width,
+		height,
+	},
+} );

@@ -21,10 +21,6 @@
 .skewer img {
   z-index: 1;
   display: block;
-  height: auto; 
-  width: auto; 
-  max-width: 90vw; 
-  max-height: 90vh;
   transform-origin: 0 0;
   border: 1px dashed black;
 }

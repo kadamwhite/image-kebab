@@ -30,7 +30,11 @@ describe( 'handles reducer', () => {
     let state = handles()
     let nextState = handles( state, moveHandle( tr, 9, 5 ) );
 
-    expect( nextState ).not.toBe( state );
+		expect( nextState ).not.toBe( state );
+		expect( nextState.tl ).toBe( state.tl );
+		expect( nextState.tr ).not.toBe( state.tr );
+		expect( nextState.bl ).toBe( state.bl );
+		expect( nextState.br ).toBe( state.br );
     expect( nextState ).toEqual( {
       tl: { x: 0, y: 0 },
       tr: { x: 9, y: 5 },
@@ -42,6 +46,10 @@ describe( 'handles reducer', () => {
     nextState = handles( nextState, moveHandle( bl, 42, -10 ) );
 
     expect( nextState ).not.toBe( state );
+		expect( nextState.tl ).toBe( state.tl );
+		expect( nextState.tr ).toBe( state.tr );
+		expect( nextState.bl ).not.toBe( state.bl );
+		expect( nextState.br ).toBe( state.br );
     expect( nextState ).toEqual( {
       tl: { x: 0, y: 0 },
       tr: { x: 9, y: 5 },

@@ -1,7 +1,12 @@
-export const imageHeight = ( state ) => state.image.height;
+import { tl, tr, bl } from '../constants';
+
 export const imageSource = ( state ) => state.image.src;
-export const imageWidth = ( state ) => state.image.width;
+export const imageWidth = ( state ) =>
+	state.image.corners[ tr ].x - state.image.corners[ tl ].x;
+export const imageHeight = ( state ) =>
+	state.image.corners[ bl ].y - state.image.corners[ tl ].y;
 export const imageCorner = ( state, corner ) => state.image.corners[ corner ];
+
 export const handle = ( state, corner ) => state.handles[ corner ];
 
 const cornerDelta = ( state, corner, dimension ) => {
@@ -11,6 +16,3 @@ const cornerDelta = ( state, corner, dimension ) => {
 };
 export const cornerDeltaX = ( state, corner ) => cornerDelta( state, corner, 'x' );
 export const cornerDeltaY = ( state, corner ) => cornerDelta( state, corner, 'y' );
-
-export const windowWidth = ( state ) => state.window.width;
-export const windowHeight = ( state ) => state.window.height;

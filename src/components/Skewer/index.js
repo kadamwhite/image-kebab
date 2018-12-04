@@ -76,7 +76,6 @@ class Skewer extends PureComponent {
 				{ children }
 				<img
 					alt="skewable"
-					ref={ node => this.setComputedImageSize( node ) }
 					style={ {
 						transform: this.getTransform(),
 					} }

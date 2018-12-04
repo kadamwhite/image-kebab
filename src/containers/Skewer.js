@@ -1,18 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Skewer from '../components/Skewer';
-import { setImagePosition } from '../store/actions';
 import DragHandleContainer from './DragHandle';
 import { corners } from '../constants';
 
-const mapStateToProps = ( state ) => ( {
-	src: state.image.src,
-	width: state.image.width,
-	height: state.image.height,
-} );
+import {
+	imageWidth,
+	imageSource,
+	imageHeight,
+} from '../store/selectors';
 
-const mapDispatchToProps = ( dispatch ) => ( {
-	setImagePosition: ( boundingRect ) => dispatch( setImagePosition( boundingRect ) ),
+const mapStateToProps = ( state ) => ( {
+	src: imageSource( state ),
+	width: imageWidth( state ),
+	height: imageHeight( state ),
 } );
 
 const SkewerContainer = ( props ) => (
@@ -26,4 +27,4 @@ const SkewerContainer = ( props ) => (
 	</Skewer>
 );
 
-export default connect( mapStateToProps, mapDispatchToProps )( SkewerContainer );
+export default connect( mapStateToProps )( SkewerContainer );

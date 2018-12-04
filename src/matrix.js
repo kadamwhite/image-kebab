@@ -1,15 +1,16 @@
 const numeric = window.numeric;
 
-const pairToPoint = ( [ x, y ] ) => ( { x, y } );
+export const pairToPoint = ( [ x, y ] ) => ( { x, y } );
 
 /**
  * Generate the transformation array.
+ *
+ * Adapted from https://franklinta.com/2014/09/08/computing-css-matrix3d-transforms/
  *
  * @param {Object[]} fromPoint Array of { x, y } objects representing the original corners.
  * @param {Object[]} toPoint   Array of { x, y } objects representing the transformed corners.
  */
 export const calculateMatrix = ( fromPoint, toPoint ) => {
-  // Adapted from https://franklinta.com/2014/09/08/computing-css-matrix3d-transforms/
   // console.assert( fromPoint.length === 4 & toPoint.length === 4 );
 
   // Creates 8x8 array.
