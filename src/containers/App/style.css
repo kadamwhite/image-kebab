@@ -30,3 +30,9 @@
     transform: rotate(360deg);
   }
 }
+
+button,
+input[type="button"],
+input[type="file"] {
+	cursor: pointer;
+}

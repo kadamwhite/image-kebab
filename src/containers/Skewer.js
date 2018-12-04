@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Skewer from '../components/Skewer';
 import { setImagePosition } from '../store/actions';
-import DragHandleContainer from './DragHandleContainer';
+import DragHandleContainer from './DragHandle';
 import { corners } from '../constants';
 
 const mapStateToProps = ( state ) => ( {
@@ -15,8 +15,8 @@ const mapDispatchToProps = ( dispatch ) => ( {
 	setImagePosition: ( boundingRect ) => dispatch( setImagePosition( boundingRect ) ),
 } );
 
-export default connect( mapStateToProps, mapDispatchToProps )( (
-	<Skewer>
+const SkewerContainer = ( props ) => (
+	<Skewer { ...props }>
 		{ corners.map( ( corner ) => (
 			<DragHandleContainer
 				key={ `handle-${ corner }` }
@@ -24,4 +24,6 @@ export default connect( mapStateToProps, mapDispatchToProps )( (
 			/>
 		) ) }
 	</Skewer>
-) );
+);
+
+export default connect( mapStateToProps, mapDispatchToProps )( SkewerContainer );

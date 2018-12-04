@@ -1,4 +1,3 @@
-import { corners } from '../../constants';
 import { MOVE_HANDLE } from '../actions';
 import { makeCornersXYObjects } from '../../helpers';
 
