@@ -55,8 +55,8 @@ class DragHandle extends PureComponent {
         className="draghandle"
         ref={ node => { this.el = node; } }
         style={ {
-          top: x,
-          left: y,
+          top: y,
+          left: x,
         } }
       >
         { /*

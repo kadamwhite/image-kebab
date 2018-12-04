@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
 
-import { handle } from '../store/selectors';
+import { cornerX, cornerY } from '../store/selectors';
 import DragHandle from '../components/DragHandle';
 
 const mapStateToProps = ( state, ownProps ) => {
-	const { x, y } = handle( state, ownProps.corner );
 	return {
-		x,
-		y,
+		x: cornerX( state, ownProps.corner ),
+		y: cornerY( state, ownProps.corner ),
 	};
 };
 

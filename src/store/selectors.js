@@ -16,3 +16,14 @@ const cornerDelta = ( state, corner, dimension ) => {
 };
 export const cornerDeltaX = ( state, corner ) => cornerDelta( state, corner, 'x' );
 export const cornerDeltaY = ( state, corner ) => cornerDelta( state, corner, 'y' );
+
+export const cornerX = ( state, corner ) => {
+	const offset = handle( state, corner );
+	const source = imageCorner( state, corner );
+	return source.x + offset.x;
+};
+export const cornerY = ( state, corner ) => {
+	const offset = handle( state, corner );
+	const source = imageCorner( state, corner );
+	return source.y + offset.y;
+};
