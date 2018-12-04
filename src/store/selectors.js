@@ -11,3 +11,6 @@ const cornerDelta = ( state, corner, dimension ) => {
 };
 export const cornerDeltaX = ( state, corner ) => cornerDelta( state, corner, 'x' );
 export const cornerDeltaY = ( state, corner ) => cornerDelta( state, corner, 'y' );
+
+export const windowWidth = ( state ) => state.window.width;
+export const windowHeight = ( state ) => state.window.height;
