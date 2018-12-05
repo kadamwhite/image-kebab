@@ -1,3 +1,5 @@
+import memoize from 'lodash.memoize';
+
 import { tl, tr, bl, corners } from '../constants';
 import { getTransform } from '../matrix';
 
@@ -21,6 +23,13 @@ const cornerDelta = ( state, corner ) => {
 
 export const cornerX = ( state, corner ) => handle( state, corner ).x;
 export const cornerY = ( state, corner ) => handle( state, corner ).y;
+
+export const fromPoint = memoize( ( width, height ) => [
+	{ x: 0, y: 0 },
+	{ x: 0, y: height },
+	{ x: width, y: 0 },
+	{ x: width, y: height },
+] );
 
 export const matrixTransform = ( state ) => {
 	const width = imageWidth( state );

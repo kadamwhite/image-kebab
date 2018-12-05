@@ -80,7 +80,6 @@ export const getTransform = ( width, height, deltas ) => {
       y: original.y + delta.y,
     };
 	} );
-	console.log( fromPoint, toPoint );
 
   // Calculate transformation matrix and reduce to matrix3d transform syntax.
   const H = calculateMatrix( fromPoint, toPoint );

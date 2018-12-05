@@ -1,10 +1,13 @@
 import { MOVE_HANDLE, SET_IMAGE } from '../actions';
-import { computeCorners, makeCornersXYObjects } from '../../helpers';
+import { computeCorners } from '../../helpers';
 
-const initialState = makeCornersXYObjects();
 
-export default ( state = initialState, action = {} ) => {
+export default ( state = null, action = {} ) => {
 	if ( action.type === SET_IMAGE ) {
+		if ( state ) {
+			// Once initialized, do not reset handle positions when image changes.
+			return state;
+		}
 		const { width, height } = action.payload;
 		return computeCorners( width, height );
 	}

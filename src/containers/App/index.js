@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import SkewerContainer from '../Skewer';
+import DragHandleContainer from '../DragHandle';
 import DropTargetContainer from '../DropTarget';
 import DropZone from '../DropZone';
+
+import { corners } from '../../constants';
 
 import './style.css';
 
@@ -16,7 +19,15 @@ export const App = ( { imageLoaded } ) => (
 	<DropZone>
 		<div className="App">
 			{ imageLoaded ? (
-				<SkewerContainer />
+				<Fragment>
+					<SkewerContainer />
+					{ corners.map( ( corner ) => (
+						<DragHandleContainer
+							key={ `handle-${ corner }` }
+							corner={ corner }
+						/>
+					) ) }
+				</Fragment>
 			) : (
 				<header className="App-header">
 					<h1>Image Kebab<em>!</em></h1>
