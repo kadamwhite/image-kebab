@@ -64,27 +64,23 @@ export const calculateMatrix = ( fromPoint, toPoint ) => {
  * @param {Object[]} toPoint   Array of { x, y } objects representing the transformed corners.
  * @return {String} matrix3d transform string.
  */
-export const getTransform = ( fromPoint, toPoint ) => {
-  // // Both fromPoint and toPoint must be ordered the same
-  // // (top left, bottom left, top right, bottom right)
-  // const fromPoint = [
-  //   { x: 0, y: 0 },
-  //   { x: 0, y: height },
-  //   { x: width, y: 0 },
-  //   { x: width, y: height },
-  // ];
-  // const toPoint = [
-  //   transforms.tl,
-  //   transforms.bl,
-  //   transforms.tr,
-  //   transforms.br,
-  // ].map( ( delta, idx ) => {
-  //   const original = fromPoint[ idx ];
-  //   return {
-  //     x: original.x + delta.x,
-  //     y: original.y + delta.y,
-  //   };
-  // } );
+export const getTransform = ( width, height, deltas ) => {
+  // Both fromPoint and toPoint must be ordered the same
+  // (top left, bottom left, top right, bottom right)
+  const fromPoint = [
+    { x: 0, y: 0 },
+    { x: 0, y: height },
+    { x: width, y: 0 },
+    { x: width, y: height },
+  ];
+  const toPoint = deltas.map( ( delta, idx ) => {
+    const original = fromPoint[ idx ];
+    return {
+      x: original.x + delta.x,
+      y: original.y + delta.y,
+    };
+	} );
+	console.log( fromPoint, toPoint );
 
   // Calculate transformation matrix and reduce to matrix3d transform syntax.
   const H = calculateMatrix( fromPoint, toPoint );

@@ -23,7 +23,8 @@ export const cornerX = ( state, corner ) => handle( state, corner ).x;
 export const cornerY = ( state, corner ) => handle( state, corner ).y;
 
 export const matrixTransform = ( state ) => {
-	const fromPoints = corners.map( corner => imageCorner( state, corner ) );
-	const toPoints = corners.map( corner => handle( state, corner ) );
-	return getTransform( fromPoints, toPoints );
+	const width = imageWidth( state );
+	const height = imageHeight( state );
+	const deltas = corners.map( corner => cornerDelta( state, corner ) );
+	return getTransform( width, height, deltas );
 };
