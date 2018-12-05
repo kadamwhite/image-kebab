@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import throttle from 'lodash.throttle';
+import classNames from 'classnames';
 
 import './style.css';
 
@@ -11,32 +13,44 @@ class DragHandle extends PureComponent {
       dragging: false,
     };
 
-    this.dragging = false;
+		this.dragging = false;
+		this.onDrag = throttle( this.onDrag, 16 );
 
     this.onMouseDown = this.onMouseDown.bind( this );
     this.onMouseMove = this.onMouseMove.bind( this );
     this.onMouseUp = this.onMouseUp.bind( this );
-  }
+	}
+
+	componentDidMount() {
+		window.addEventListener( 'mousemove', this.onMouseMove );
+		window.addEventListener( 'mouseup', this.onMouseUp );
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener( 'mousemove', this.onMouseMove );
+		window.removeEventListener( 'mouseup', this.onMouseUp );
+	}
 
   onDrag( clientX, clientY ) {
     if ( ! this.state.dragging || typeof this.props.onDrag !== 'function' ) {
       return;
     }
-    this.props.onDrag( this.state.dragging, [
-      clientX - this.x,
-      clientY - this.y,
-    ] );
+    this.props.onDrag( clientX, clientY );
   }
 
   onMouseDown( evt ) {
+		evt.preventDefault();
     this.setState( {
-      preview: null,
+      dragging: true,
     } );
     this.x = evt.clientX;
     this.y = evt.clientY;
   }
 
   onMouseMove( evt ) {
+		if ( this.state.dragging ) {
+			this.onDrag( evt.clientX, evt.clientY );
+		}
   }
 
   onMouseUp( evt ) {
@@ -49,22 +63,18 @@ class DragHandle extends PureComponent {
   }
 
   render() {
-    const { x, y } = this.props;
+		const { x, y } = this.props;
+		const { dragging } = this.state;
     return (
       <div
-        className="draghandle"
+        className={ classNames( 'draghandle', { dragging } ) }
         ref={ node => { this.el = node; } }
         style={ {
           top: y,
           left: x,
         } }
-      >
-        { /*
-          onMouseDown={ this.onMouseDown }
-          onMouseMove={ this.onMouseMove }
-          onMouseUp={ this.onMouseUp }
-        */ }
-      </div>
+				onMouseDown={ this.onMouseDown }
+			/>
     );
   }
 }

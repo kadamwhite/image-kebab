@@ -3,7 +3,7 @@
   position: absolute;
   z-index: 2;
 
-  opacity: 0.2;
+  opacity: 0.5;
   border: 1px dotted red;
   transform: translate( -50%, -50% );
   width: 10%;
@@ -31,6 +31,6 @@
 .draghandle:hover::after {
   opacity: 1;
 }
-/* .dragzone.dragging {
+.draghandle.dragging {
   cursor: grabbing;
-} */
+}
