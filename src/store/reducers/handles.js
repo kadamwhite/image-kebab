@@ -14,7 +14,7 @@ export default ( state = null, action = {} ) => {
 
 	if ( action.type === MOVE_HANDLE ) {
 		const { corner, x, y } = action.payload;
-		if ( state[ corner ].x === x && state[ corner ].y === y ) {
+		if ( state && state[ corner ].x === x && state[ corner ].y === y ) {
 			// May fire more often than an actual update is needed.
 			return state;
 		}
