@@ -1,4 +1,5 @@
-import { tl, tr, bl } from '../constants';
+import { tl, tr, bl, corners } from '../constants';
+import { getTransform } from '../matrix';
 
 export const imageSource = ( state ) => state.image.src;
 export const imageWidth = ( state ) =>
@@ -9,13 +10,20 @@ export const imageCorner = ( state, corner ) => state.image.corners[ corner ];
 
 export const handle = ( state, corner ) => state.handles[ corner ];
 
-const cornerDelta = ( state, corner, dimension ) => {
+const cornerDelta = ( state, corner ) => {
 	const start = imageCorner( state, corner );
 	const end = handle( state, corner );
-	return end[ dimension ] - start[ dimension ];
+	return {
+		x: end.x - start.x,
+		y: end.y - start.y,
+	};
 };
-export const cornerDeltaX = ( state, corner ) => cornerDelta( state, corner, 'x' );
-export const cornerDeltaY = ( state, corner ) => cornerDelta( state, corner, 'y' );
 
 export const cornerX = ( state, corner ) => handle( state, corner ).x;
 export const cornerY = ( state, corner ) => handle( state, corner ).y;
+
+export const matrixTransform = ( state ) => {
+	const fromPoints = corners.map( corner => imageCorner( state, corner ) );
+	const toPoints = corners.map( corner => handle( state, corner ) );
+	return getTransform( fromPoints, toPoints );
+};

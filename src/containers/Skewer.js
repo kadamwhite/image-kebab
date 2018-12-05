@@ -8,12 +8,14 @@ import {
 	imageWidth,
 	imageSource,
 	imageHeight,
+	matrixTransform,
 } from '../store/selectors';
 
 const mapStateToProps = ( state ) => ( {
 	src: imageSource( state ),
 	width: imageWidth( state ),
 	height: imageHeight( state ),
+	matrixTransform: matrixTransform( state ),
 } );
 
 const SkewerContainer = ( props ) => (

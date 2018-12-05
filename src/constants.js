@@ -4,4 +4,5 @@ export const br = 'br';
 export const tl = 'tl';
 export const tr = 'tr';
 
-export const corners = [ tl, tr, br, bl ];
+// This ordering is dictated by calculateMatrix() in matrix.js.
+export const corners = [ tl, bl, tr, br ];
