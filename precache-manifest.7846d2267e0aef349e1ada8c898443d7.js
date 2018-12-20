@@ -8,19 +8,19 @@ self.__precacheManifest = [
     "url": "/image-kebab/static/js/runtime~main.82de9f50.js"
   },
   {
-    "revision": "916e1fb4ce193db602f7",
-    "url": "/image-kebab/static/js/main.916e1fb4.chunk.js"
+    "revision": "6da69b196f179558e804",
+    "url": "/image-kebab/static/js/main.6da69b19.chunk.js"
   },
   {
-    "revision": "28d787669d464f6977ed",
-    "url": "/image-kebab/static/js/1.28d78766.chunk.js"
+    "revision": "dedc979f4a8e24e7ab28",
+    "url": "/image-kebab/static/js/1.dedc979f.chunk.js"
   },
   {
-    "revision": "916e1fb4ce193db602f7",
-    "url": "/image-kebab/static/css/main.f01ca233.chunk.css"
+    "revision": "6da69b196f179558e804",
+    "url": "/image-kebab/static/css/main.6b41c764.chunk.css"
   },
   {
-    "revision": "7a668da07482779045fcf644088255b9",
+    "revision": "6b5509166d524462235188eb56c12776",
     "url": "/image-kebab/index.html"
   }
 ];
