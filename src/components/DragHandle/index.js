@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import throttle from 'lodash.throttle';
 import classNames from 'classnames';
 
 import './style.css';
@@ -14,21 +13,20 @@ class DragHandle extends PureComponent {
     };
 
 		this.dragging = false;
-		this.onDrag = throttle( this.onDrag, 16 );
 
     this.onMouseDown = this.onMouseDown.bind( this );
     this.onMouseMove = this.onMouseMove.bind( this );
-    this.onMouseUp = this.onMouseUp.bind( this );
+    // this.onMouseUp = this.onMouseUp.bind( this );
 	}
 
 	componentDidMount() {
 		window.addEventListener( 'mousemove', this.onMouseMove );
-		window.addEventListener( 'mouseup', this.onMouseUp );
+		// window.addEventListener( 'mouseup', this.onMouseUp );
 	}
 
 	componentWillUnmount() {
 		window.removeEventListener( 'mousemove', this.onMouseMove );
-		window.removeEventListener( 'mouseup', this.onMouseUp );
+		// window.removeEventListener( 'mouseup', this.onMouseUp );
 	}
 
   onDrag( clientX, clientY ) {
@@ -40,11 +38,17 @@ class DragHandle extends PureComponent {
 
   onMouseDown( evt ) {
 		evt.preventDefault();
-    this.setState( {
-      dragging: true,
-    } );
-    this.x = evt.clientX;
-    this.y = evt.clientY;
+		if ( ! this.state.dragging ) {
+			this.setState( {
+				dragging: true,
+			} );
+			this.x = evt.clientX;
+			this.y = evt.clientY;
+		} else {
+			this.setState( {
+				dragging: false,
+			} );
+		}
   }
 
   onMouseMove( evt ) {
@@ -53,14 +57,14 @@ class DragHandle extends PureComponent {
 		}
   }
 
-  onMouseUp( evt ) {
-    if ( this.state.dragging ) {
-      this.onDrag( evt.clientX, evt.clientY );
-    }
-    this.setState( {
-      dragging: false,
-    } );
-  }
+  // onMouseUp( evt ) {
+  //   if ( this.state.dragging ) {
+  //     this.onDrag( evt.clientX, evt.clientY );
+  //   }
+  //   this.setState( {
+  //     dragging: false,
+  //   } );
+  // }
 
   render() {
 		const { x, y } = this.props;

@@ -25,12 +25,13 @@
   border-radius: 50%;
   transition: opacity 200ms;
 }
-.draghandle:hover {
-  opacity: 1;
-}
-.draghandle:hover::after {
+.draghandle:hover,
+.draghandle:hover::after,
+.draghandle.dragging,
+.draghandle.dragging::after {
   opacity: 1;
 }
 .draghandle.dragging {
+	border-width: 2px;
   cursor: grabbing;
 }
