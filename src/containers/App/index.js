@@ -20,6 +20,9 @@ export const App = ( { imageLoaded } ) => (
 		<div className="App">
 			{ imageLoaded ? (
 				<Fragment>
+					<p className="directions">
+						Click a corner, then move your mouse to position corner. Click again to lock position.
+					</p>
 					<SkewerContainer />
 					{ corners.map( ( corner ) => (
 						<DragHandleContainer

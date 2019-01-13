@@ -32,8 +32,9 @@ class DragHandle extends PureComponent {
   onDrag( clientX, clientY ) {
     if ( ! this.state.dragging || typeof this.props.onDrag !== 'function' ) {
       return;
-    }
-    this.props.onDrag( clientX, clientY );
+		}
+		// Add in the offsets to ensure position properly tracks the cursor.
+    this.props.onDrag( clientX + this.x, clientY + this.y );
   }
 
   onMouseDown( evt ) {
@@ -42,8 +43,14 @@ class DragHandle extends PureComponent {
 			this.setState( {
 				dragging: true,
 			} );
-			this.x = evt.clientX;
-			this.y = evt.clientY;
+			// Get current position of handle & mouse.
+			const { x, y } = this.props;
+			const { clientX, clientY } = evt;
+			// Figure out the offset between evt.clientX/clientY and x/y.
+			// Maintain these offsets while dragging so that the corner does not
+			// magically snap to the cursor position as you move the mouse.
+			this.x = x - clientX;
+			this.y = y - clientY;
 		} else {
 			this.setState( {
 				dragging: false,
